@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>HomeWork</title>
+</head>
+<style type="text/css">
+ .draggable{
+  width: 100px;
+  height: 100px;
+  background: green;
+  display: block;
+  position: absolute;
+ }
+</style>
+<script type="text/javascript">
+	 window.onload = function () {
+ 	    var dragging = null,
+ 	        diffX = 0,
+ 	        diffY = 0;
+      var div = document.querySelector("#div");
+          div.addEventListener("mousedown", handleEvent); 
+          div.addEventListener("mousemove", handleEvent); 
+          div.addEventListener("mouseup", handleEvent); 
+ 	    function handleEvent(e){
+ 	 	      var target = e.target;
+ 	 	        if (target.tagName == 'DIV') {
+ 	           	switch (e.type){
+ 	 	            case "mousedown":
+ 	 	             if (target.className.indexOf("draggable")>-1){
+ 	 	   	            dragging = target;
+ 	 	   	            diffX = e.clientX-target.offsetLeft;
+ 	 	   	            diffY = e.clientY-target.offsetTop;
+ 	 	             }
+ 	 	            break;
+
+ 	 	            case "mousemove":
+ 	 	             if (dragging!==null){
+ 	 	   	            dragging.style.left = (e.clientX-diffX)+"px";
+ 	 	   	            dragging.style.top = (e.clientY-diffY)+"px";
+ 	 	            }	
+ 	 	            break;
+
+ 	 	            case "mouseup":
+ 	 	             dragging = null;
+ 	 	            break;
+ 	 	          }
+ 	          }
+ 	    };
+   }  
+</script>
+<body>
+  <!-- 
+	2. drag;
+	-->
+<div id="div" class="draggable"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>HomeWork</title>
+</head>
+<style type="text/css">
+ .move{
+  width: 100px;
+  height: 100px;
+  background: purple;
+  display: block;
+  left:8px;
+  position:absolute;
+ }
+
+
+</style>
+<script type="text/javascript">
+	 window.onload = function () {
+ 	  
+     var div = document.getElementById("div");
+         div.addEventListener("click", handleEvent); 
+     var inp = document.getElementById("btn");
+         inp.addEventListener("click", stopMove); 
+     var coords = div.getBoundingClientRect();
+     var winWidth=document.documentElement.clientWidth;
+     var pos=coords.left; 
+     var intervalId;
+
+     function handleEvent(e){
+        var target = e.target;
+          if (target.tagName == 'DIV') {        
+              intervalId = setInterval(incrementNum,10);
+        
+            function incrementNum(){
+               if (pos<winWidth-target.offsetWidth){ 
+                   pos +=4;
+                   target.style.left = pos + "px";
+               }
+               else {
+                   clearInterval(intervalId); 
+                   target.style.left = coords.left + "px";
+                   pos = coords.left; 
+               }
+            }
+          }     
+      }
+
+    function stopMove(e){
+       var target = e.target;
+       if (target.tagName == 'INPUT') {        
+          clearInterval(intervalId);  
+       }
+    }
+ }
+</script>
+<body>
+    <!-- 
+	3. создайте div, при клике на него, div начинает двигаться вправо, при клике на кнопку - останавливается, при попадании div к краю окна, он переходит к началу окна. 
+	-->
+<div class ="move" id="div"></div>
+<input class="button" type="button" id="btn" value="Остановить" style="position:absolute; top:200px;left:8px;width:100px;height:25px;"></div>
+</body>
+</html>
